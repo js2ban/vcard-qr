@@ -56,17 +56,21 @@
   }
 
   function downloadQR() {
-    const img = document.querySelector("#qrcode img");
-    if (!img) {
-      alert("Generate QR first");
-      return;
-    }
+  const img = document.querySelector("#qrcode img");
+  const file = document.getElementById("person").value;
 
-    const a = document.createElement("a");
-    a.href = img.src;
-    a.download = "vcard-qr.png";
-    a.click();
+  if (!img || !file) {
+    alert("Generate QR first");
+    return;
   }
+
+  const filename = file.replace(".vcf", ".png");
+
+  const a = document.createElement("a");
+  a.href = img.src;
+  a.download = filename;
+  a.click();
+}
 </script>
 
 </body>
