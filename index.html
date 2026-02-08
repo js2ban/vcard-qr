@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>vCard QR</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2 id="title">vCard QR</h2>
+<div id="qrcode"></div>
+
+<script>
+function getPersonFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("person");
+}
+
+async function loadVCard(person) {
+  const response = await fetch(`${person}.vcf`);
+  if (!response.ok) {
+    throw new Error("vCard 파일을 찾을 수 없습니다.");
+  }
+  return await response.text();
+}
+
+function downloadPNG(canvas, filename) {
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function init() {
+  const person = getPersonFromQuery();
+  if (!person) {
+    document.getElementById("title").textContent =
+      "URL에 ?person=이름 을 붙여주세요";
+    return;
+  }
+
+  document.getElementById("title").textContent =
+    `vCard QR – ${person}`;
+
+  const vcardText = await loadVCard(person);
+  const SIZE = 1024;
+
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
+
+  const qr = new QRCode(qrContainer, {
+    text: vcardText,
+    width: SIZE,
+    height: SIZE,
+    correctLevel: QRCode.CorrectLevel.Q
+  });
+
+  // QR 생성 후 PNG 자동 다운로드
+  setTimeout(() => {
+    const canvas = qrContainer.querySelector("canvas");
+    if (canvas) {
+      downloadPNG(canvas, `${person}-1024px.png`);
+    }
+  }, 300);
+}
+
+init();
+</script>
+
+</body>
+</html>

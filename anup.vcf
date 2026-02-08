@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Chakraborty;Anup Kumar;;;
+FN:Anup Kumar Chakraborty
+TEL;TYPE=CELL:+821098618894
+EMAIL;TYPE=HOME,INTERNET:anup@gedenlines.com
+ORG:GEDEN LINES
+TITLE:Project Manager
+EMAIL;TYPE=WORK,INTERNET:hanwha.geden@gmail.com
+ADR;TYPE=WORK;LABEL="HanwhaOcean":
+;;HanwhaOcean Oceanplaza, 122, Okpo-ro;Geoje-si;Gyeongsangnam-do;53232;Republic of Korea
+EMAIL;TYPE=WORK,INTERNET:daehan.geden@gmail.com
+ADR;TYPE=WORK;LABEL="Yeongam":
+;;290, Yongang-ro;Samho-eup;Yeongam-gun;Jeollanam-do;58460;Republic of Korea
+ADR;TYPE=WORK;LABEL="Haenam":
+;;498, Joseonso-gil;Hwawon-myeon;Haenam-gun;Jeollanam-do;59000;Republic of Korea
+END:VCARD
